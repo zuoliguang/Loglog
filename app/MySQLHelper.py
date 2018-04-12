@@ -16,7 +16,7 @@ class MySQLHelper:
             self.conn.select_db(self.database)
             self.conn.set_charset(self.charset)
             self.cursor=self.conn.cursor()
-        except pymysql.error as e:  
+        except Exception as e:  
             print ('MySql Error : %d %s' %(e.args[0],e.args[1]))  
     
     # 执行SQL 返回SQL的执行结果
@@ -24,7 +24,7 @@ class MySQLHelper:
         try:  
             rows=self.cursor.execute(sql)  
             return rows;  
-        except pymysql.error as e:  
+        except Exception as e:  
             print('MySql Error: %s SQL: %s'%(e,sql))  
  
     # 执行SQL 返回第一条记录
@@ -37,7 +37,7 @@ class MySQLHelper:
             for i in range(0,len(result)):  
                 row[desc[i][0]]=result[i]  
             return row;  
-        except pymysql.error as e:  
+        except Exception as e:  
             print('MySql Error: %s SQL: %s'%(e,sql))  
 
     # 返回SQL查询的所有结果
@@ -53,7 +53,7 @@ class MySQLHelper:
                     row[desc[i][0]]=cloumn[i]  
                 rows.append(row)    
             return rows;  
-        except pymysql.error as e:  
+        except Exception as e:  
             print('MySql Error: %s SQL: %s'%(e,sql))  
 
     # 向指定表插入数据
@@ -68,7 +68,7 @@ class MySQLHelper:
             self.query("set names 'utf8'")  
             self.query(sql)  
             self.commit()  
-        except pymysql.error as e:  
+        except Exception as e:  
             self.conn.rollback()  
             print('MySql Error: %s %s'%(e.args[0],e.args[1]))  
         finally:  
@@ -93,7 +93,7 @@ class MySQLHelper:
             self.query("set names 'utf8'")  
             self.query(sql)  
             self.commit()  
-        except pymysql.error as e:  
+        except Exception as e:  
             self.conn.rollback()  
             print('MySql Error: %s %s'%(e.args[0],e.args[1]))  
         finally:  

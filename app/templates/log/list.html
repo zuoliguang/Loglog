@@ -1,0 +1,264 @@
+{% extends "log/main/layout.html" %}
+{% block body %}
+<style>
+.demo{padding:5px 10px;background:#FFF;margin:20px;text-align:center;border:solid 1px #CCC;border-radius:10px;}
+.pagination-box .pagination{margin-right:10px;}
+.pagination-box { margin-left: 2%; }
+.log-countent { height: 100%; overflow: hidden; }
+.log-table { height: 90%; overflow: scroll;overflow-x: hidden; }
+.table>tbody>tr>td { text-align: center; }
+.table>thead>tr>th { text-align: center; }
+</style>
+<div class="log-countent">
+	<div class="log-table">
+		<div style="padding: 10px 15px 10px;">
+		    <form class="bs-example bs-example-form" role="form">
+		        <div class="row">
+		            <div class="col-lg-4">
+		                <div class="input-group">
+		                    <input type="text" class="form-control" placeholder="输入关键字">
+		                    <span class="input-group-btn">
+		                        <button class="btn btn-default search-btn" type="button">搜索</button>
+		                    </span>
+		                </div>
+		            </div>
+		        </div>
+		    </form>
+		</div>
+		<table class="table">
+		   <thead>
+		      <tr>
+		         <th>名称</th>
+		         <th>城市</th>
+		         <th>名称</th>
+		         <th>城市</th>
+		         <th>名称</th>
+		         <th>城市</th>
+		      </tr>
+		   </thead>
+		   <tbody>
+		      <tr>
+		         <td>Tanmay</td>
+		         <td>Bangalore</td>
+		         <td>Tanmay</td>
+		         <td>Bangalore</td>
+		         <td>Tanmay</td>
+		         <td>Bangalore</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      <tr>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		         <td>Sachin</td>
+		         <td>Mumbai</td>
+		      </tr>
+		      </tr>
+		   </tbody>
+		</table>
+	</div>
+	<div class="pagination-box ng-isolate-scope" page-id="pageId" page-size="pageSize" page-record="recordCount" page-url-template="urlTemplate">
+		<ul class="pagination">
+			<li ng-class="page.style" ng-repeat="page in pageList" class="ng-scope active"><a href="" class="ng-binding">首页</a></li>
+			<li ng-class="page.style" ng-repeat="page in pageList" class="ng-scope"><a href="" class="ng-binding">上一页</a></li>
+			<li ng-class="page.style" ng-repeat="page in pageList" class="ng-scope"><a href="" class="ng-binding">49</a></li>
+			<li ng-class="page.style" ng-repeat="page in pageList" class="ng-scope"><a href="" class="ng-binding">50</a></li>
+			<li ng-class="page.style" ng-repeat="page in pageList" class="ng-scope"><a href="" class="ng-binding">51</a></li>
+			<li ng-class="page.style" ng-repeat="page in pageList" class="ng-scope"><a href="" class="ng-binding">52</a></li>
+			<li ng-class="page.style" ng-repeat="page in pageList" class="ng-scope"><a href="" class="ng-binding">53</a></li>
+			<li ng-class="page.style" ng-repeat="page in pageList" class="ng-scope"><a href="" class="ng-binding">54</a></li>
+			<li ng-class="page.style" ng-repeat="page in pageList" class="ng-scope"><a href="" class="ng-binding">55</a></li>
+			<li ng-class="page.style" ng-repeat="page in pageList" class="ng-scope"><a href="" class="ng-binding">56</a></li>
+			<li ng-class="page.style" ng-repeat="page in pageList" class="ng-scope"><a href="" class="ng-binding">57</a></li>
+			<li ng-class="page.style" ng-repeat="page in pageList" class="ng-scope"><a href="" class="ng-binding">58</a></li>
+			<li ng-class="page.style" ng-repeat="page in pageList" class="ng-scope"><a href="" class="ng-binding">下一页</a></li>
+			<li ng-class="page.style" ng-repeat="page in pageList" class="ng-scope"><a href="" class="ng-binding">尾页</a></li>
+		</ul>
+		<ul class="pagination ng-scope" ng-if="pageList[0]">
+			<li class="page-count disabled"><span>共 <b class="ng-binding">1000</b> 条记录 / 共 <b class="ng-binding">125</b> 页</span></li>
+		</ul>
+	</div>
+</div>
+
+<script type="text/javascript">
+	// 自动加载第一页
+	window.onload = function(){
+		$.post("/ajaxlist", {page:1}, function(data){
+			$('#showlogdata').append(data);
+		});
+	}
+
+	// 加载数据
+	var json_data = '{"count": 3, "pages": 2, "logs": [{"uid": 123, "id": 1, "header": "header_info", "time": "11:22:33", "date": "2018-04-11", "query": "k=v", "method": "POST"}, {"uid": 321, "id": 2, "header": "header", "time": "22:11:33", "date": "2018-04-12", "query": "k=x", "method": "GET"}]}';
+
+	function formate_data(str) {
+		var data = JSON.parse(str);
+		// 加载列表
+		alert(data.count);
+		// 加载页码
+	}
+
+	formate_data(json_data);
+
+	// 搜索操作
+	$('.search-btn').click(function(){
+		alert(13);
+	});
+
+	// 翻页操作
+	$('.ng-scope').click(function(){
+		alert(11);
+	});
+</script>
+{% endblock %}
