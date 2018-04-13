@@ -36,9 +36,6 @@ redis_host = env.get('redis', 'host')
 redis_port = env.get('redis', 'port')
 redis = RedisHelper(redis_host, redis_port).handler()
 
-# [ page 参数 ]
-pageSize = 2
-
 # [ 控制器 业务逻辑部分 ]
 # 首页
 @app.route('/')
@@ -66,7 +63,7 @@ def doLogin():
         m1 = md5.new()
         m1.update(pwd.encode(encoding='utf-8'))
         password = m1.hexdigest()
-        sql = " SELECT * FROM admin WHERE username = '%s' AND password = '%s' " % (username, password)
+        sql = " SELECT * FROM `admin` WHERE `username` = '%s' AND `password` = '%s' " % (username, password)
         admin = mysql.queryOnlyRow(sql)
         if admin == None :
             return render_template('log/main/login.html', error_info=u'用户名、密码错误!')
@@ -97,20 +94,94 @@ def loglist():
 def getlist():
     data = {}
     page = request.values.get('page')
+    pageSize = request.values.get('pageSize')
     start = (int(page) - 1) * int(pageSize)
-    sql = " SELECT * FROM log LIMIT %s , %s " % (str(start), str(pageSize))
+    sql = " SELECT * FROM `log` ORDER BY `id` DESC LIMIT %s , %s " % (str(start), str(pageSize))
     countsql = " SELECT count(*) as cnt FROM log "
     countInfo = mysql.queryOnlyRow(countsql)
     logs = mysql.queryAll(sql)
     count = int(countInfo['cnt'])
     data['count'] = count
+    data['current'] = int(page)
     if logs == None:
-        data['pages'] = 0
         data['logs'] = []
     else:
-        data['pages'] = math.trunc(count / int(pageSize)) + 1
         data['logs'] = logs
     return json.dumps(data)
+
+# ajax 搜索加载数据
+@app.route('/ajaxsearch', methods=['GET', 'POST'])
+def getsearchlist():
+    searchkey = request.values.get('searchkey')
+    if searchkey=='' or searchkey==None:
+        return -1
+    data = {}
+    sql = "SELECT * FROM `log` WHERE MATCH (`uid`, `method`, `route`, `header`, `query`, `date`, `time`) AGAINST ('%s' IN BOOLEAN MODE)" % (searchkey)
+    countsql = "SELECT count(*) as cnt FROM `log` WHERE MATCH (`uid`, `method`, `route`, `header`, `query`, `date`, `time`) AGAINST ('%s' IN BOOLEAN MODE)" % (searchkey)
+    countInfo = mysql.queryOnlyRow(countsql)
+    logs = mysql.queryAll(sql)
+    count = int(countInfo['cnt'])
+    data['count'] = count
+    data['current'] = 1
+    if logs == None:
+        data['logs'] = []
+    else:
+        data['logs'] = logs
+    return json.dumps(data)
+
+# 接收日志信息请求
+@app.route('/logapi', methods=['GET', 'POST'])
+def logapi():
+    if request.method == 'GET':
+        data = {}
+        data['status'] = -1
+        data['message'] = u'传递方式错误'
+        return json.dumps(data)
+    uid = request.values.get('uid') # 用户id
+    method = request.values.get('method') # 传参方式
+    route = request.values.get('route') # 路由
+    header = request.values.get('header') # 头信息 
+    query = request.values.get('query') # 参数 ?x=y&a=b
+    date = request.values.get('date') # 日期 Y-m-d
+    time = request.values.get('time') # 时间 H:i:s
+    if uid=='' or method=='' or route=='' or header=='' or date=='' or time=='':
+        data = {}
+        data['status'] = -2
+        data['message'] = u'必填参数不能为空'
+        return json.dumps(data)
+    # 队列操作 该位置将信息存储到redis的队列中
+    loginfo = {}
+    loginfo['uid'] = uid
+    loginfo['method'] = method
+    loginfo['route'] = route
+    loginfo['header'] = header
+    loginfo['query'] = query
+    loginfo['date'] = date
+    loginfo['time'] = time
+    logstr = json.dumps(loginfo)
+    redis.lpush(env.get('cache_key', 'logcachekey'), logstr)
+    data = {}
+    data['status'] = 1
+    data['message'] = u'操作OK'
+    return json.dumps(data)
+
+
+# 循环在队列中获取多个信息，并将其保存到数据库
+# 该操作将其放入定时任务中按一定频次执行
+@app.route('/logloop')
+def logloop():
+    log_json = redis.lpop(env.get('cache_key', 'logcachekey'))
+    log = json.loads(log_json)
+    uid = log['uid']
+    method = log['method']
+    route = log['route']
+    header = log['header']
+    query = log['query']
+    date = log['date']
+    time = log['time']
+    sql = " INSERT INTO `log` (`uid`, `method`, `route`, `header`, `query`, `date`, `time`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s') " % (uid,method,route,header,query,date,time)
+    mysql.query(sql)
+    return log_json
 
 # [ 启动项 ]
 if __name__ == '__main__':
