@@ -168,6 +168,7 @@ def logapi():
 
 # 循环在队列中获取多个信息，并将其保存到数据库
 # 该操作将其放入定时任务中按一定频次执行
+# TODO 未完待续... 将其修改成循环获取多个 sql处理成一次多个加入数据库
 @app.route('/logloop')
 def logloop():
     log_json = redis.lpop(env.get('cache_key', 'logcachekey'))
