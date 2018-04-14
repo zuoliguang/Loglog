@@ -168,19 +168,24 @@ def logapi():
 
 # 循环在队列中获取多个信息，并将其保存到数据库
 # 该操作将其放入定时任务中按一定频次执行
-# TODO 未完待续... 将其修改成循环获取多个 sql处理成一次多个加入数据库
+# TODO 未完待续... 将其修改成循环获取30个 sql处理成一次多个加入数据库
 @app.route('/logloop')
 def logloop():
-    log_json = redis.lpop(env.get('cache_key', 'logcachekey'))
-    log = json.loads(log_json)
-    uid = log['uid']
-    method = log['method']
-    route = log['route']
-    header = log['header']
-    query = log['query']
-    date = log['date']
-    time = log['time']
-    sql = " INSERT INTO `log` (`uid`, `method`, `route`, `header`, `query`, `date`, `time`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s') " % (uid,method,route,header,query,date,time)
+    sql = " INSERT INTO `log` (`uid`, `method`, `route`, `header`, `query`, `date`, `time`) VALUES "
+    log_sql_list = []
+    for x in xrange(0, 30):
+        log_json = redis.lpop(env.get('cache_key', 'logcachekey'))
+        log = json.loads(log_json)
+        uid = log['uid']
+        method = log['method']
+        route = log['route']
+        header = log['header']
+        query = log['query']
+        date = log['date']
+        time = log['time']
+        log_sql_point = "('%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (uid,method,route,header,query,date,time)
+        log_sql_list.append(log_sql_point)
+    sql = sql + ','.join(log_sql_list)
     mysql.query(sql)
     return log_json
 
