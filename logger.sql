@@ -25,13 +25,12 @@ CREATE TABLE `admin` (
   `password` varchar(100) NOT NULL DEFAULT 'e10adc3949ba59abbe56e057f20f883e' COMMENT '密码 md5 默认 123456',
   `type` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '管理账号类型 0超级 1普通',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('1', 'zlgcg', 'e10adc3949ba59abbe56e057f20f883e', '0');
-INSERT INTO `admin` VALUES ('2', 'zlgcg', 'e10adc3949ba59abbe56e057f20f883e', '0');
+INSERT INTO `admin` VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e', '0');
 
 -- ----------------------------
 -- Table structure for `log`
