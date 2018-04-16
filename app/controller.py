@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- coding: UTF-8 -*- 
 from flask import Flask, url_for, request # 处理url
 from flask import render_template, redirect # 页面输出跳转
