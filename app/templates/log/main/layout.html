@@ -83,19 +83,17 @@
                         </div>
                         <ul class="navContent" style="display:block;">
                             
-                            <li >
+                            <li {% if request.url_rule is equalto(current_url) %} class="active" {% endif %}>
                                 <div class="showtitle" style="width:100px;"> 日志列表 </div>
-                                <a href="/loglist">
+                                <a href="{{ url_for('loglist') }}">
                                     <span class="sublist-icon glyphicon glyphicon-th-list"></span>
                                     <span class="sub-title">日志列表</span>
                                 </a>
                             </li>
 
-                            <li class="active">
-                                <div class="showtitle" style="width:100px;">
-                                    压力分布
-                                </div>
-                                <a href="/pv">
+                            <li {% if request.url_rule is equalto(current_url) %} class="active" {% endif %}>
+                                <div class="showtitle" style="width:100px;"> 压力分布 </div>
+                                <a href="{{ url_for('pv') }}">
                                     <span class="sublist-icon glyphicon glyphicon-bookmark"></span>
                                     <span class="sub-title">压力分布</span>
                                 </a>

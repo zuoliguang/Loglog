@@ -87,7 +87,7 @@ def loglist():
     if json_admin == None :
         return redirect(url_for('login'))
     admin = json.loads(json_admin)
-    return render_template('log/list.html', version=version, username=admin['username'])
+    return render_template('log/list.html', version=version, username=admin['username'], current_url='/loglist')
 
 # ajax 加载数据
 @app.route('/ajaxlist', methods=['GET', 'POST'])
@@ -137,10 +137,10 @@ def pv():
         return redirect(url_for('login'))
     admin = json.loads(json_admin)
     # 获取线性分布图数据
-    sql = " SELECT `date`, count(*) AS pv FROM log GROUP BY date "
+    sql = "SELECT `date`, count(*) AS pv FROM `log` GROUP BY `date`"
     data = mysql.queryAll(sql)
     jsondata = json.dumps(data, ensure_ascii=False)
-    return render_template('log/pv.html', version=version, username=admin['username'], jsondata=jsondata)
+    return render_template('log/pv.html', version=version, username=admin['username'], jsondata=jsondata, current_url='/pv')
 
 # 接收日志信息请求
 @app.route('/logapi', methods=['GET', 'POST'])
