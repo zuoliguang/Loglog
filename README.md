@@ -29,18 +29,18 @@
 
              传递参数
 
-             uid 
+             uid string
 
-             method 
+             method string
 
-             route 
+             route string
 
-             header 
+             header string
 
-             query 
+             query string
 
-             date 
+             date string (Y-m-d)
 
-             time 
+             time string (H:i:s)
 
     6、该项目简单布局，适于学习，也可作为拓展的一个思路二次开发完善。
