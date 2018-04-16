@@ -14,33 +14,33 @@
 
 安装方式：
 
-1、项目下载服务器 例 /home/www/html/Loglog
+    1、项目下载服务器 例 /home/www/html/Loglog
 
-2、配置文件.env 配置自己的环境信息
+    2、配置文件.env 配置自己的环境信息
 
-3、启动项目 python run.py 
+    3、启动项目 python run.py 
 
-4、打开定时任务 crontab , 添加定时任务 http://{ip}:5000/logloop 默认5000端口 
+    4、打开定时任务 crontab , 添加定时任务 http://{ip}:5000/logloop 默认5000端口 
 
-5、默认管理员账号 admin ：123456 
+    5、默认管理员账号 admin ：123456 
 
-6、远程调用接口 http://{ip}:5000/logapi
-         传参方式 POST  
+    6、远程调用接口 http://{ip}:5000/logapi
+             传参方式 POST  
 
-         传递参数
+             传递参数
 
-         uid 
+             uid 
 
-         method 
+             method 
 
-         route 
+             route 
 
-         header 
+             header 
 
-         query 
+             query 
 
-         date 
-         
-         time 
-         
-6、该项目简单布局，适于学习，也可作为拓展的一个思路二次开发完善。
+             date 
+
+             time 
+
+    6、该项目简单布局，适于学习，也可作为拓展的一个思路二次开发完善。
