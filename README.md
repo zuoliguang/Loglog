@@ -30,7 +30,7 @@
 
              传递参数
 
-             uid string
+             uid string
 
              method string
 
