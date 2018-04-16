@@ -1,0 +1,67 @@
+{% extends "log/main/layout.html" %}
+{% block body %}
+<script type="text/javascript" src="/static/ext/ECharts/echarts.common.min.js"></script>
+<script type="text/javascript" src="/static/javascript/log/HtmlUtil.js"></script>
+<div class="log-countent">
+	<div class="log-table">
+		<div id="main" style="width: 100%;height: 400px;margin-top: 50px;"></div>
+	</div>
+</div>
+<script type="text/javascript">
+// 基于准备好的dom，初始化echarts实例
+// 参考代码源地址: http://echarts.baidu.com/examples/
+var myChart = echarts.init(document.getElementById('main'));
+var json = HtmlUtil.htmlDecode('{{ jsondata }}');
+var data = JSON.parse(json);
+var datelist = [];
+var pointlist = [];
+data.forEach(function(item){
+	datelist.push(item['date']);
+	pointlist.push(item['pv']);
+});
+
+// 指定图表的配置项和数据
+option = {
+    title: {
+        text: '压力分布图'
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['访问量']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: datelist
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [
+        {
+            name:'访问量',
+            type:'line',
+            smooth: true,
+            stack: '总量',
+            data: pointlist
+        }
+    ]
+};
+
+// 使用刚指定的配置项和数据显示图表。
+myChart.setOption(option);
+</script>
+{% endblock %}

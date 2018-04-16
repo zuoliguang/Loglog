@@ -129,6 +129,19 @@ def getsearchlist():
         data['logs'] = logs
     return json.dumps(data)
 
+# 获取线性压力图
+@app.route('/pv')
+def pv():
+    json_admin = redis.get(env.get('cache_key', 'logadminsession'));
+    if json_admin == None :
+        return redirect(url_for('login'))
+    admin = json.loads(json_admin)
+    # 获取线性分布图数据
+    sql = " SELECT `date`, count(*) AS pv FROM log GROUP BY date "
+    data = mysql.queryAll(sql)
+    jsondata = json.dumps(data, ensure_ascii=False)
+    return render_template('log/pv.html', version=version, username=admin['username'], jsondata=jsondata)
+
 # 接收日志信息请求
 @app.route('/logapi', methods=['GET', 'POST'])
 def logapi():
