@@ -20,13 +20,21 @@
 
 6、远程调用接口 http://{ip}:5000/logapi
          传参方式 POST  
+
          传递参数
+
          uid 
+
          method 
+
          route 
+
          header 
+
          query 
+
          date 
+         
          time 
          
 6、该项目简单布局，适于学习，也可作为拓展的一个思路二次开发完善。
